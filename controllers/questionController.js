@@ -1,5 +1,6 @@
 const Question = require('../models/question');
 
+// Create questions and insert them into the database
 exports.createQuestions = async (req, res) => {
   try {
     const questions = [
@@ -162,8 +163,10 @@ exports.createQuestions = async (req, res) => {
     ];
 
     await Question.insertMany(questions);
+    console.log('Questions created successfully'); // Logging for debugging
     res.status(201).json({ message: 'Questions created' });
   } catch (error) {
+    console.error('Error creating questions:', error.message); // Logging for debugging
     res.status(400).json({ error: error.message });
   }
 };
@@ -172,9 +175,12 @@ exports.createQuestions = async (req, res) => {
 exports.getQuestionsBySubject = async (req, res) => {
   try {
     const { subject } = req.params;
+    console.log(`Fetching questions for subject: ${subject}`); // Logging for debugging
     const questions = await Question.find({ subject });
+    console.log(`Found questions: ${questions}`); // Logging for debugging
     res.status(200).json(questions);
   } catch (error) {
+    console.error('Error fetching questions:', error.message); // Logging for debugging
     res.status(400).json({ error: error.message });
   }
 };
