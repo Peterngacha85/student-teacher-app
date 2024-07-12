@@ -1,5 +1,6 @@
 const express = require('express');
 const connectDB = require('./config/db'); // Assuming you have a db configuration file
+const cors = require('cors');
 const teacherRoutes = require('./routes/teacherRoutes');
 const studentRoutes = require('./routes/studentRoutes');
 const questionRoutes = require('./routes/questionRoutes');
@@ -14,6 +15,11 @@ connectDB();
 
 // Middleware
 app.use(express.json()); // Parse incoming JSON requests
+
+// In your server.js or app.js
+
+app.use(cors());
+
 
 // Routes
 app.use('/api/teachers', teacherRoutes);
